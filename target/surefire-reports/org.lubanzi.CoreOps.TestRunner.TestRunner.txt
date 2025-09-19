@@ -1,0 +1,21 @@
+-------------------------------------------------------------------------------
+Test set: org.lubanzi.CoreOps.TestRunner.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 43.32 s <<< FAILURE! -- in org.lubanzi.CoreOps.TestRunner.TestRunner
+org.lubanzi.CoreOps.TestRunner.TestRunner.Verify that the dashboard correctly displays the correct key data values. -- Time elapsed: 19.06 s <<< FAILURE!
+java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at org.testng.Assert.assertTrue(Assert.java:67)
+	at org.lubanzi.CoreOps.StepDefinitions.DashboardStepDef.iShouldSeeAClearSummaryDisplayingTheTotalCountForProjectsEmployeesSubmitted_timesheetsAndLeave_Requests(DashboardStepDef.java:42)
+	at ✽.I should see a clear summary displaying the total count for projects, employees, submitted_timesheets and leave_Requests.(file:///C:/Users/DumisaniMbhele(Luban/Code/Coreops-test-suite/src/test/resources/Features/Dashboard.feature:12)
+
+org.lubanzi.CoreOps.TestRunner.TestRunner.Leave list displays the correct information -- Time elapsed: 19.42 s <<< FAILURE!
+java.lang.AssertionError: Incorrect value found in the table expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at org.lubanzi.CoreOps.StepDefinitions.LeaveRequestListStepDef.theTableSEntriesShouldClearlyDisplayTheEmployeeSNameTypeOfLeaveStartAndEndDatesDaysRemainingReasonStatusAndAction(LeaveRequestListStepDef.java:43)
+	at ✽.the table's entries should clearly display the employee’s name,type of Leave start and end dates, days remaining, reason, status. and action.(file:///C:/Users/DumisaniMbhele(Luban/Code/Coreops-test-suite/src/test/resources/Features/LeaveRequestList.feature:14)
+
