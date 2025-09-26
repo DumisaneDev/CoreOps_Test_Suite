@@ -121,14 +121,18 @@ public class LeaveRequestListStepDef {
         @Then("i should only see request that are for the {}")
         public void iShouldOnlySeeRequestThatAreForThe(String arg0) {
                 String EmployeeName = ConfigReader.getProperty("EmployeeNameSearch");
-               System.out.println(leaveRequestCoreObj.areRequestForEmployee(EmployeeName));
+                assertTrue(leaveRequestCoreObj.areRequestForEmployee(EmployeeName));
         }
 
         @When("in the search bar, i enter leave Type {}")
         public void inTheSearchBarIEnterLeaveType(String arg0) {
+                String leaveTypes = ConfigReader.getProperty("LeaveTypeSearch");
+                leaveRequestCoreObj.searchList(leaveTypes);
         }
 
         @Then("i should only receive request that are for the leave type {}")
         public void iShouldOnlyReceiveRequestThatAreForTheLeaveType(String arg0) {
+                String leaveType = ConfigReader.getProperty("LeaveTypeSearch");
+                assertTrue(leaveRequestCoreObj.areRequestForLeaveType(leaveType));
         }
 }

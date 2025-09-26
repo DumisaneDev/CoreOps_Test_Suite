@@ -2,7 +2,6 @@ package org.lubanzi.Core_Ops.PageObjects;
 
 import org.lubanzi.Core_Ops.Utils.ConfigReader;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +22,7 @@ public class LeaveRequestListPage extends BasePage {
         private static final By loc_lblCancelStatus = By.xpath("//*[@id=\"form2\"]/div[3]/div[3]/div/table/tbody/tr[46]/td[6]");
         private static final By loc_lblApproveStatus = By.xpath("//*[@id=\"form2\"]/div[3]/div[3]/div/table/tbody/tr[49]/td[6]");
         private static final By loc_lblRejectStatus = By.xpath("//*[@id=\"form2\"]/div[3]/div[3]/div/table/tbody/tr[51]/td[6]");
-        private static final By loc_tblSearch = By.xpath("//table[@class=\"table custom-table mb-0 datatables\"]");
+        private static final By loc_tblSearch = By.xpath("//table");
 
         public LeaveRequestListPage(WebDriver driver) {
                 super(driver);
@@ -92,7 +91,7 @@ public class LeaveRequestListPage extends BasePage {
                 return validateTableData(employees, leaveTypes, statuses);
         }
 
-        ;
+
 
         public boolean validateTableData(List<String> employees, List<String> leaveTypes, List<String> status) {
                 String[] expectedEmployees = ConfigReader.getProperty("LeaveEmployees").split(",");
@@ -106,7 +105,7 @@ public class LeaveRequestListPage extends BasePage {
                 return areEmployeesIncorrect && areLeaveTypesIncorrect && areStatusesIncorrect;
         }
 
-        ;
+
 
         public boolean didStatusChange(String ExpectedStatus) {
                 WebElement status = wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(getElement(loc_lblCancelStatus))));
@@ -130,12 +129,9 @@ public class LeaveRequestListPage extends BasePage {
         }
 
         public boolean areRequestForEmployee(String employee) {
-                int maxAttempts = 3;
-                for (int attempt = 0; attempt < maxAttempts; attempt++) {
-                        try {
                                 waitForElementToBeVisible(loc_tblSearch);
                                 List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
-                                List<String> employees = getStrings(tableContent);
+                                List<String> employees = getEmployees(tableContent);
 
                                 for (String emp : employees) {
                                         if (emp.equals(employee)) {
@@ -143,22 +139,9 @@ public class LeaveRequestListPage extends BasePage {
                                         }
                                 }
                                 return false;
-                        } catch (TimeoutException e) {
-                                if (attempt == maxAttempts - 1) {
-                                        throw e;
-                                }
-                                // Wait before retrying
-                                try {
-                                        Thread.sleep(1000);
-                                } catch (InterruptedException ex) {
-                                        Thread.currentThread().interrupt();
-                                }
-                        }
-                }
-                return true;
         }
 
-        private static List<String> getStrings(List<List<String>> tableContent) {
+        private static List<String> getEmployees(List<List<String>> tableContent) {
                 List<String> employees = new ArrayList<>();
                 for (int row = 1; row < tableContent.size(); row++) {
                         if (row < tableContent.size() && tableContent.get(row).size() > 0) {
@@ -168,7 +151,27 @@ public class LeaveRequestListPage extends BasePage {
                 return employees;
         }
 
+        public boolean areRequestForLeaveType(String leave){
+                waitForElementToBeVisible(loc_tblSearch);
+                List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
+                List<String> leaveTypes = getLeaveType(tableContent);
 
+                for(String leaveType: leaveTypes){
+                        if(leaveType.equals(leave)){
+                                return true;
+                        }
+                }
+                return false;
+        }
 
+        private static List<String> getLeaveType(List<List<String>> tableContent){
+                List<String> leaveType = new ArrayList<>();
+                for (int row = 1; row < tableContent.size(); row++) {
+                        if (row < tableContent.size() && tableContent.get(row).size() > 0) {
+                                leaveType.add(tableContent.get(row).get(1));
+                        }
+                }
+                return leaveType;
+        };
 
 }
