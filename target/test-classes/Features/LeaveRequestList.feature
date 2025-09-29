@@ -13,9 +13,6 @@ Feature: Leave Request List Feature
     When I see the table
     Then the table's entries should clearly display the employee’s name,type of Leave start and end dates, days remaining, reason, status. and action.
 
-#      | employeeNames | leaveTypes | leaveDates | leaveDuration | statue | action |
-#      |
-#      |            |            |               |        |        |
 @CancelRequest
 Scenario: employee can cancel their leave request
   Given i am on the leave Request list
@@ -44,7 +41,7 @@ Scenario: employee can cancel their leave request
 
 
    @SearchWithEmployeeName
-   Scenario Outline: varify search functionality using employee name
+   Scenario Outline: verify search functionality using employee name
      Given i am on the leave Request list
      When i enter employees name <employee> in the search bar
      Then  i should only see request that are for the employee<test_data>
@@ -54,7 +51,7 @@ Scenario: employee can cancel their leave request
        | Dumisane Mbhele |
 
      @SearchWithLeaveType
-  Scenario Outline: varify search functionality using leave type
+  Scenario Outline: verify search functionality using leave type
     Given i am on the leave Request list
     When in the search bar, i enter leave Type <type>
     Then  i should only receive request that are for the leave type <type>
@@ -62,3 +59,15 @@ Scenario: employee can cancel their leave request
     Examples:
       | type   |
       | Annual |
+
+@AscendingOrderUsingEmployeeName
+Scenario: verify sorting feature, specifically sorting in ascending alphabetical using employee name
+  Given i am on the leave Request list
+  When i click the up arrow underneath the employee Name
+  Then the list of employee names in the requests should be sorted alphabetically
+
+@DescendingOrderUsingLeaveStatus
+Scenario: verify sorting feature, specifically sorting in reverse-alphabetical order using the leave statuses of each request
+  Given i am on the leave Request list
+  When i click the down arrow underneath the Status header on the table
+  Then the list of leave statuses should be sorted in reverse alphabetical order.

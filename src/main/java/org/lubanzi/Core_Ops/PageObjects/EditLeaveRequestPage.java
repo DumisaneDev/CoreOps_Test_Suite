@@ -37,7 +37,6 @@ public class EditLeaveRequestPage extends BasePage{
         //TODO: Write up all validation method for assertion purposes
         public boolean isUserOnTheRightRequest(String expectedHeader){
                 String actualHeader = getPageElementContent(loc_lblHeader);
-
                 return expectedHeader.equals(actualHeader);
         }
 }

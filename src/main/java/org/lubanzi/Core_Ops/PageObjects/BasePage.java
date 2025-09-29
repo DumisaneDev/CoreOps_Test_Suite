@@ -79,10 +79,11 @@ public class BasePage implements IPageObjects {
         public List<List<String>> tableContentRetriever(By locator){
                 //find the table
                 WebElement Table = getElement(locator);
-                By loc_row = By.xpath("//tr");
+                By loc_row = By.xpath("//tbody//tr");
+
 
                 //find the rows
-                List<WebElement> rows = wait.until(ExpectedConditions.visibilityOfAllElements(Table.findElements(loc_row)));
+                List<WebElement> rows = Table.findElements(loc_row);
 
                 List<List<String>> tableData = new LinkedList<>();
 
@@ -97,8 +98,7 @@ public class BasePage implements IPageObjects {
                                 rowValues.add(cell.getText());
                         }
 
-                        // Print the row values
-                        System.out.println("Row " + (i + 1) + ": " + rowValues);
+//                        System.out.printf("Row %s: %s%n", i, rowValues);
                         tableData.add(rowValues);
                 }
 
