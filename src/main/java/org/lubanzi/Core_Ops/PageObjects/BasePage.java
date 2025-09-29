@@ -97,8 +97,8 @@ public class BasePage implements IPageObjects {
                         for (WebElement cell : cells) {
                                 rowValues.add(cell.getText());
                         }
-                        // Print the row values
-                        System.out.println("Row " + (i + 1) + ": " + rowValues);
+
+//                        System.out.printf("Row %s: %s%n", i, rowValues);
                         tableData.add(rowValues);
                 }
 

@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LeaveRequestListPage extends BasePage {
         //TODO: Find, Declare and initialize all locators found on the Leave Request Page.
@@ -91,8 +91,6 @@ public class LeaveRequestListPage extends BasePage {
                 return validateTableData(employees, leaveTypes, statuses);
         }
 
-
-
         public boolean validateTableData(List<String> employees, List<String> leaveTypes, List<String> status) {
                 String[] expectedEmployees = ConfigReader.getProperty("LeaveEmployees").split(",");
                 String[] expectedLeaveTypes = ConfigReader.getProperty("LeaveTypes").split(",");
@@ -104,8 +102,6 @@ public class LeaveRequestListPage extends BasePage {
 
                 return areEmployeesIncorrect && areLeaveTypesIncorrect && areStatusesIncorrect;
         }
-
-
 
         public boolean didStatusChange(String ExpectedStatus) {
                 WebElement status = wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(getElement(loc_lblCancelStatus))));
@@ -144,7 +140,7 @@ public class LeaveRequestListPage extends BasePage {
         private static List<String> getEmployees(List<List<String>> tableContent) {
                 List<String> employees = new ArrayList<>();
                 for (int row = 1; row < tableContent.size(); row++) {
-                        if (row < tableContent.size() && tableContent.get(row).size() > 0) {
+                        if (row < tableContent.size() && !tableContent.get(row).isEmpty()) {
                                 employees.add(tableContent.get(row).get(0));
                         }
                 }
@@ -167,11 +163,51 @@ public class LeaveRequestListPage extends BasePage {
         private static List<String> getLeaveType(List<List<String>> tableContent){
                 List<String> leaveType = new ArrayList<>();
                 for (int row = 1; row < tableContent.size(); row++) {
-                        if (row < tableContent.size() && tableContent.get(row).size() > 0) {
-                                leaveType.add(tableContent.get(row).get(1));
+                        if (row < tableContent.size() && !tableContent.get(row).isEmpty()) {
+                                leaveType.add(tableContent.get(row).get(5));
                         }
                 }
                 return leaveType;
-        };
+        }
 
+        public boolean isListOfEmployeesOnRequestSortedAlphabetically(){
+                waitForElementToBeVisible(loc_tblSearch);
+                List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
+                List<String> actualEmployees = getEmployees(tableContent);
+                String expectedEmployees = ConfigReader.getProperty("LeaveEmployees");
+
+                String[] employees = expectedEmployees.split(",");
+                List<String> expectedEmployeesList = Arrays.stream(employees).
+                        distinct().
+                        sorted().
+                        toList();
+
+                List<String> nonDuplicateTestEmployees = actualEmployees.stream().
+                        filter(e -> !e.contentEquals("Select Employee")).
+                        distinct().
+                        toList();
+
+                return nonDuplicateTestEmployees.equals(expectedEmployeesList);
+        }
+
+        public boolean isListOfLeaveStatuesSortedReverseAlphabetically(){
+                waitForElementToBeVisible(loc_tblSearch);
+                List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
+                List<String> actualStatues = getLeaveType(tableContent);
+
+                String expectedValues = ConfigReader.getProperty("LeaveStatus");
+                String[] expectedValuesArray = expectedValues.split(",");
+                List<String> expectedStatuses = Arrays.stream(expectedValuesArray).
+                                                sorted().
+                                                collect(Collectors.toList());
+
+                Collections.reverse(expectedStatuses);
+
+                List<String> nonDuplicateStatusList = actualStatues.
+                                                      stream().
+                                                      distinct().
+                                                      toList();
+
+                return expectedStatuses.equals(nonDuplicateStatusList);
+        }
 }

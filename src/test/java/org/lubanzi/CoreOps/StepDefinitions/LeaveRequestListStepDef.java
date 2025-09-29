@@ -84,7 +84,7 @@ public class LeaveRequestListStepDef {
         @Then("the leave request's status should change to Approved;")
         public void theLeaveRequestSStatusShouldChangeToApproved() {
                 String expectedStatus = ConfigReader.getProperty("leaveStatusForAApprovedRequest");
-                leaveRequestCoreObj.isRequestApproved(expectedStatus);
+                assertTrue(leaveRequestCoreObj.isRequestApproved(expectedStatus));
         }
 
         @When("i click the review button on a pending request to be rejected.")
@@ -106,33 +106,54 @@ public class LeaveRequestListStepDef {
         @Then("the leave request's status should change to Rejected;")
         public void theLeaveRequestSStatusShouldChangeToRejected() {
                 String expectedStatus = ConfigReader.getProperty("leaveStatusForARejectedRequest");
-                leaveRequestCoreObj.isRequestRejected(expectedStatus);
+                assertTrue(leaveRequestCoreObj.isRequestRejected(expectedStatus));
         }
 
         /**
         * Search functionality cases
         * */
         @When("i enter {} in the search bar")
-        public void iEnterInTheSearchBar(String arg0) {
+        public void iEnterInTheSearchBar() {
                 String searchValue = ConfigReader.getProperty("EmployeeNameSearch");
                 leaveRequestCoreObj.searchList(searchValue);
         }
 
         @Then("i should only see request that are for the {}")
-        public void iShouldOnlySeeRequestThatAreForThe(String arg0) {
+        public void iShouldOnlySeeRequestThatAreForThe() {
                 String EmployeeName = ConfigReader.getProperty("EmployeeNameSearch");
                 assertTrue(leaveRequestCoreObj.areRequestForEmployee(EmployeeName));
         }
 
         @When("in the search bar, i enter leave Type {}")
-        public void inTheSearchBarIEnterLeaveType(String arg0) {
+        public void inTheSearchBarIEnterLeaveType() {
                 String leaveTypes = ConfigReader.getProperty("LeaveTypeSearch");
                 leaveRequestCoreObj.searchList(leaveTypes);
         }
 
         @Then("i should only receive request that are for the leave type {}")
-        public void iShouldOnlyReceiveRequestThatAreForTheLeaveType(String arg0) {
+        public void iShouldOnlyReceiveRequestThatAreForTheLeaveType() {
                 String leaveType = ConfigReader.getProperty("LeaveTypeSearch");
                 assertTrue(leaveRequestCoreObj.areRequestForLeaveType(leaveType));
+        }
+
+        @When("i click the up arrow underneath the employee Name")
+        public void iClickTheUpArrowUnderneathTheEmployeeName() {
+                leaveRequestCoreObj.clickEmployeeAscendingSortBtn();
+        }
+
+        @Then("the list of employee names in the requests should be sorted alphabetically")
+        public void theListOfEmployeeNamesInTheRequestsShouldBeSortedAlphabetically() {
+                assertTrue(leaveRequestCoreObj.isListOfEmployeesOnRequestSortedAlphabetically());
+        }
+
+
+        @When("i click the down arrow underneath the Status header on the table")
+        public void iClickTheDownArrowUnderneathTheStatusHeaderOnTheTable() {
+                leaveRequestCoreObj.clickStatusDescendingSortBtn();
+        }
+
+        @Then("the list of leave statuses should be sorted in reverse alphabetical order.")
+        public void theListOfLeaveStatusesShouldBeSortedInReverseAlphabeticalOrder() {
+                assertTrue(leaveRequestCoreObj.isListOfLeaveStatuesSortedReverseAlphabetically());
         }
 }
