@@ -75,7 +75,6 @@ public class BasePage implements IPageObjects {
                 return getElement(locator).isDisplayed();
         }
 
-
         public List<List<String>> tableContentRetriever(By locator){
                 //find the table
                 WebElement Table = getElement(locator);
@@ -88,8 +87,7 @@ public class BasePage implements IPageObjects {
                 List<List<String>> tableData = new LinkedList<>();
 
                 // Process each row
-                for (int i = 0; i < rows.size(); i++) {
-                        WebElement row = rows.get(i);
+                for (WebElement row : rows) {
                         List<WebElement> cells = row.findElements(By.tagName("td"));
 
                         // Store cell values for this row
@@ -98,7 +96,6 @@ public class BasePage implements IPageObjects {
                                 rowValues.add(cell.getText());
                         }
 
-//                        System.out.printf("Row %s: %s%n", i, rowValues);
                         tableData.add(rowValues);
                 }
 
@@ -114,7 +111,4 @@ public class BasePage implements IPageObjects {
                 }
                 return false;
         }
-
-
-
 }

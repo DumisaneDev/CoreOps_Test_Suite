@@ -136,6 +136,9 @@ public class LeaveRequestListStepDef {
                 assertTrue(leaveRequestCoreObj.areRequestForLeaveType(leaveType));
         }
 
+        /**
+         * Sorting Test cases
+         */
         @When("i click the up arrow underneath the employee Name")
         public void iClickTheUpArrowUnderneathTheEmployeeName() {
                 leaveRequestCoreObj.clickEmployeeAscendingSortBtn();

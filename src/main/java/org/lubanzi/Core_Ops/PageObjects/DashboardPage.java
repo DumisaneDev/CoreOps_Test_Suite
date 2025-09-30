@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class DashboardPage extends BasePage {
         //TODO: Find, Declare and initialize all locators found on the Dashboard page.
-        private static final By loc_imgLogo = By.xpath("//img");
-        private static final By loc_lblLogo = By.xpath("//span[@style=\"font-size: 24px; font-weight: bold;\"]");
         private static final By loc_msgWelcome = By.xpath("//h1");
         private static final By loc_lblActiveProjects = By.id("lblActiveProjects");
         private static final By loc_lblEmployees = By.id("lblTeamMembers");
