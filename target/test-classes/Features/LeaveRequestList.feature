@@ -1,7 +1,6 @@
 @LeaveRequest
 Feature: Leave Request List Feature
 
-
   Background:
     Given i am logged into the system as a valid user.
     When I click the leave dropdown

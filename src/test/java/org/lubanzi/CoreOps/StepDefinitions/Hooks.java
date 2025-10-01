@@ -1,9 +1,9 @@
 package org.lubanzi.CoreOps.StepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.lubanzi.Core_Ops.Utils.ConfigReader;
+import org.lubanzi.Core_Ops.Utils.ScreenshotTaker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -11,6 +11,7 @@ public class Hooks {
 
         public static WebDriver driver;
         public static String TEST_URL = ConfigReader.getProperty("testURL");
+        private String srcPath = "src/test/resources/Screenshots/";
 
         @Before
         public void webdriverSetup(){
@@ -25,4 +26,14 @@ public class Hooks {
                 }
                 driver.quit();
         }
+
+        @AfterStep
+        public void ScreenShotUtil(Scenario StepInfo){
+                ScreenshotTaker SrcShotTaker = new ScreenshotTaker(srcPath,(StepInfo.getName() + " " + StepInfo.getId()) , this.driver);
+                if(StepInfo.isFailed()){
+                        System.out.printf("Step Failed: %s", StepInfo.getName() );
+                        SrcShotTaker.takeScreenShot();
+                }
+        }
+
 }

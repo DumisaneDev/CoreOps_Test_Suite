@@ -16,9 +16,9 @@ public class LeaveRequestListPage extends BasePage {
         private static final By loc_icnAscArrow = By.xpath("//a[@href=\"?sort=EmployeeName&dir=asc\"]");
         private static final By loc_icnDescArrow = By.xpath("//a[@href=\"?sort=Status&dir=desc\"]");
         private static final By loc_tblLeaveRequest = By.xpath("//table");
-        private static final By loc_btnApproveRequest = By.xpath("//*[contains(@onclick, 'ButtonEdit(this.id)')");
-        private static final By loc_btnRejectRequest = By.xpath("//*[contains(@onclick, 'ButtonEdit(this.id)')");
-        private static final By loc_btnCancelRequest = By.xpath("//*[contains(@onclick, 'ButtonEdit(this.id)')");
+        private static final By loc_btnApproveRequest = By.xpath("//*[contains(@onclick, 'ButtonEdit(this.id)')]");
+        private static final By loc_btnRejectRequest = By.xpath("//*[contains(@onclick, 'ButtonEdit(this.id)')]");
+        private static final By loc_btnCancelRequest = By.xpath("//*[contains(@onclick, 'ButtonEdit(this.id)')]");
         private static final By loc_lblCancelStatus = By.xpath("//*[@id=\"form2\"]/div[3]/div[3]/div/table/tbody/tr[46]/td[6]");
         private static final By loc_lblApproveStatus = By.xpath("//*[@id=\"form2\"]/div[3]/div[3]/div/table/tbody/tr[49]/td[6]");
         private static final By loc_lblRejectStatus = By.xpath("//*[@id=\"form2\"]/div[3]/div[3]/div/table/tbody/tr[51]/td[6]");

@@ -38,9 +38,7 @@ public class DashboardStepDef {
                 String expectedEmployees = ConfigReader.getProperty("Employees");
                 String expectedTimesheets = ConfigReader.getProperty("TimesheetsSubmitted");
                 String expectedLeaveRequests = ConfigReader.getProperty("LeaveRequests");
-
-                assertTrue(dashboardCoreObj.isDashboardDataCorrect(expectedProjects,expectedEmployees
-                        ,expectedTimesheets,expectedLeaveRequests));
-
+                assertTrue(dashboardCoreObj.isDashboardDataCorrect(expectedProjects,expectedEmployees,
+                                expectedTimesheets,expectedLeaveRequests));
         }
 }
