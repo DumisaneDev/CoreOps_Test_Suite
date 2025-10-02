@@ -36,11 +36,4 @@ public class Hooks {
                 }
         }
 
-        /*Hooks:
-         * @Before => method happens before your test
-         * @After => method happens after our test.
-         * @BeforeStep => method happens before each step.
-         * @AfterStep => method happens after each step.
-         */
-
 }

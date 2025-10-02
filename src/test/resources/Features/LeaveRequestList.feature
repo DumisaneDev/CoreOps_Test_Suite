@@ -59,7 +59,7 @@ Scenario: employee can cancel their leave request
       | type   |
       | Annual |
 
-@AscendingOrderUsingEmployeeName
+
 Scenario: verify sorting feature, specifically sorting in ascending alphabetical using employee name
   Given i am on the leave Request list
   When i click the up arrow underneath the employee Name
