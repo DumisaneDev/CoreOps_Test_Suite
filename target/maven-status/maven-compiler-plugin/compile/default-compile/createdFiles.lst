@@ -1,8 +1,0 @@
-org\lubanzi\Core_Ops\PageObjects\LeaveRequestListPage.class
-org\lubanzi\Core_Ops\PageObjects\IPageObjects.class
-org\lubanzi\Core_Ops\Utils\ConfigReader.class
-org\lubanzi\Core_Ops\Utils\ScreenshotTaker.class
-org\lubanzi\Core_Ops\PageObjects\LoginPage.class
-org\lubanzi\Core_Ops\PageObjects\BasePage.class
-org\lubanzi\Core_Ops\PageObjects\DashboardPage.class
-org\lubanzi\Core_Ops\PageObjects\EditLeaveRequestPage.class

@@ -127,7 +127,7 @@ public class LeaveRequestListPage extends BasePage {
         public boolean areRequestForEmployee(String employee) {
                                 waitForElementToBeVisible(loc_tblSearch);
                                 List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
-                                List<String> employees = getEmployees(tableContent);
+                                List<String> employees = getLeaveEmployeeDataType(tableContent, 0);
 
                                 for (String emp : employees) {
                                         if (emp.equals(employee)) {
@@ -137,20 +137,10 @@ public class LeaveRequestListPage extends BasePage {
                                 return false;
         }
 
-        private static List<String> getEmployees(List<List<String>> tableContent) {
-                List<String> employees = new ArrayList<>();
-                for (int row = 1; row < tableContent.size(); row++) {
-                        if (row < tableContent.size() && !tableContent.get(row).isEmpty()) {
-                                employees.add(tableContent.get(row).get(0));
-                        }
-                }
-                return employees;
-        }
-
         public boolean areRequestForLeaveType(String leave){
                 waitForElementToBeVisible(loc_tblSearch);
                 List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
-                List<String> leaveTypes = getLeaveType(tableContent);
+                List<String> leaveTypes = getLeaveEmployeeDataType(tableContent, 5);
 
                 for(String leaveType: leaveTypes){
                         if(leaveType.equals(leave)){
@@ -160,20 +150,10 @@ public class LeaveRequestListPage extends BasePage {
                 return false;
         }
 
-        private static List<String> getLeaveType(List<List<String>> tableContent){
-                List<String> leaveType = new ArrayList<>();
-                for (int row = 1; row < tableContent.size(); row++) {
-                        if (row < tableContent.size() && !tableContent.get(row).isEmpty()) {
-                                leaveType.add(tableContent.get(row).get(5));
-                        }
-                }
-                return leaveType;
-        }
-
         public boolean isListOfEmployeesOnRequestSortedAlphabetically(){
                 waitForElementToBeVisible(loc_tblSearch);
                 List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
-                List<String> actualEmployees = getEmployees(tableContent);
+                List<String> actualEmployees = getLeaveEmployeeDataType(tableContent, 0);
                 String expectedEmployees = ConfigReader.getProperty("LeaveEmployees");
 
                 String[] employees = expectedEmployees.split(",");
@@ -193,7 +173,7 @@ public class LeaveRequestListPage extends BasePage {
         public boolean isListOfLeaveStatuesSortedReverseAlphabetically(){
                 waitForElementToBeVisible(loc_tblSearch);
                 List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
-                List<String> actualStatues = getLeaveType(tableContent);
+                List<String> actualStatues = getLeaveEmployeeDataType(tableContent, 5);
 
                 String expectedValues = ConfigReader.getProperty("LeaveStatus");
                 String[] expectedValuesArray = expectedValues.split(",");

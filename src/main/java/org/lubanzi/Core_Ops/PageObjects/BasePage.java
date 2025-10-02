@@ -111,4 +111,14 @@ public class BasePage implements IPageObjects {
                 }
                 return false;
         }
+
+        public static List<String> getLeaveEmployeeDataType(List<List<String>> tableContent,int pos){
+                List<String> EmployeeDataType = new ArrayList<>();
+                for (int row = 1; row < tableContent.size(); row++) {
+                        if (row < tableContent.size() && !tableContent.get(row).isEmpty()) {
+                                EmployeeDataType.add(tableContent.get(row).get(pos));
+                        }
+                }
+                return EmployeeDataType;
+        }
 }
