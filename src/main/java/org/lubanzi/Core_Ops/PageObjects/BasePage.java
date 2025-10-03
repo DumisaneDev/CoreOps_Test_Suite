@@ -95,10 +95,8 @@ public class BasePage implements IPageObjects {
                         for (WebElement cell : cells) {
                                 rowValues.add(cell.getText());
                         }
-
                         tableData.add(rowValues);
                 }
-
                 return tableData;
         }
 
@@ -112,7 +110,7 @@ public class BasePage implements IPageObjects {
                 return false;
         }
 
-        public static List<String> getLeaveEmployeeDataType(List<List<String>> tableContent,int pos){
+        public static List<String> getLeaveEmployeeDataType(List<List<String>> tableContent, int pos){
                 List<String> EmployeeDataType = new ArrayList<>();
                 for (int row = 1; row < tableContent.size(); row++) {
                         if (row < tableContent.size() && !tableContent.get(row).isEmpty()) {

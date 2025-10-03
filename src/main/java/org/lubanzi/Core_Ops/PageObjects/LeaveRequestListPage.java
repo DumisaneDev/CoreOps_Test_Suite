@@ -140,7 +140,7 @@ public class LeaveRequestListPage extends BasePage {
         public boolean areRequestForLeaveType(String leave){
                 waitForElementToBeVisible(loc_tblSearch);
                 List<List<String>> tableContent = tableContentRetriever(loc_tblSearch);
-                List<String> leaveTypes = getLeaveEmployeeDataType(tableContent, 5);
+                List<String> leaveTypes = getLeaveEmployeeDataType(tableContent, 1);
 
                 for(String leaveType: leaveTypes){
                         if(leaveType.equals(leave)){

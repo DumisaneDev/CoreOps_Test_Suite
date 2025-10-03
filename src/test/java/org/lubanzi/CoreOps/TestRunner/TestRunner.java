@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
                   "json:target/CucumberReport.json"
         },
         publish = true,
-       tags = "@Dashboard"
+       tags = "@SearchWithLeaveType"
 )
 
 public class TestRunner {
