@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 public class EditLeaveRequestPage extends BasePage{
         //TODO: Find, Declare and initialize all locators found on the Edit leave page.
         private static final By loc_lblHeader = By.xpath("//h1");
-        private static final By loc_txtEmployeeName = By.id("txtEmployeeName");
-        private static final By loc_txtLeaveType = By.id("txtLeaveType");
         private static final By loc_btnApprove = By.id("btnUpdate");
         private static final By loc_btnReject = By.id("btnReject");
         private static final By loc_btnCancel = By.id("btnCancel");

@@ -112,26 +112,26 @@ public class LeaveRequestListStepDef {
         /**
         * Search functionality cases
         * */
-        @When("i enter {} in the search bar")
+        @When("i enter employee name in the search bar")
         public void iEnterInTheSearchBar() {
                 String searchValue = ConfigReader.getProperty("EmployeeNameSearch");
                 leaveRequestCoreObj.searchList(searchValue);
         }
 
-        @Then("i should only see request that are for the {}")
+        @Then("i should only see request that are for the employee.")
         public void iShouldOnlySeeRequestThatAreForThe() {
                 String EmployeeName = ConfigReader.getProperty("EmployeeNameSearch");
                 assertTrue(leaveRequestCoreObj.areRequestForEmployee(EmployeeName));
         }
 
-        @When("in the search bar, i enter leave Type {}")
-        public void inTheSearchBarIEnterLeaveType(String arg0) {
+        @When("in the search bar, i enter leave Type")
+        public void inTheSearchBarIEnterLeaveType() {
                 String leaveTypes = ConfigReader.getProperty("LeaveTypeSearch");
                 leaveRequestCoreObj.searchList(leaveTypes);
         }
 
-        @Then("i should only receive request that are for the leave type {}")
-        public void iShouldOnlyReceiveRequestThatAreForTheLeaveType(String arg0) {
+        @Then("i should only receive request that are for the leave type.")
+        public void iShouldOnlyReceiveRequestThatAreForTheLeaveType() {
                 String leaveType = ConfigReader.getProperty("LeaveTypeSearch");
                 assertTrue(leaveRequestCoreObj.areRequestForLeaveType(leaveType));
         }
