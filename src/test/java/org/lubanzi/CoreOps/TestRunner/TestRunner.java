@@ -13,8 +13,7 @@ import org.junit.runner.RunWith;
                   "json:target/CucumberReport.json"
         },
         publish = true,
-       tags = "@DescendingOrderUsingLeaveStatus or @AscendingOrderUsingEmployeeName " +
-               "or @SearchWithEmployeeName or @SearchWithLeaveType"
+       tags = "@Dashboard"
 )
 
 public class TestRunner {
