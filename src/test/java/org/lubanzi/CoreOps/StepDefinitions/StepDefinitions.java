@@ -139,7 +139,7 @@ public class StepDefinitions {
 
         @And("I confirm the Rejection of the leave request")
         public void iConfirmTheRejectionOfTheLeaveRequest() {
-                editRequestCoreObj.acceptAlert();
+                editRequestCoreObj.confirmAction();
                 editRequestCoreObj.clickCancelBtn();
         }
 
