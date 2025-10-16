@@ -5,20 +5,24 @@ import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
+/**
+ * Interface defining common operations for page object pattern implementation.
+ * Provides standard methods for web element interaction and navigation.
+ */
 public interface IPageObjects {
-        public void configureWaitMechanism(Duration waitTime);
+        void configureWaitMechanism(Duration waitTime);
 
-        public String getPageElementContent(By locator);
+        String getPageElementContent(By locator);
 
-        public WebElement getElement(By locator);
+        WebElement getElement(By locator);
 
-        public void clickElement(By locator);
+        void clickElement(By locator);
 
-        public void sendKeys(By locator, String keys);
+        void sendKeys(By locator, String keys);
 
-        public String getPageTitle();
+        String getPageTitle();
 
-        public void navigateToTestSite(String URL);
+        void navigateToTestSite(String URL);
 
-        public String getUrl();
+        String getUrl();
 }
